@@ -14,7 +14,7 @@ Features
 * Acts as an SMTP server, no need for any 3rd-party software.
 * Validates DKIM signatures for data integrity.
 * Passes the reports in "real-time" to a web service as JSON data.
-* Persistent queueing of web service requests. I.e. if web service is down then the reports will be sent as soon as it gets up. Also means that it can survive a restart.
+* Persistent queueing of web service requests. I.e. if the web service is down then the reports will be sent as soon as it gets up. Also means that it can survive a restart.
 
 Install
 -------
