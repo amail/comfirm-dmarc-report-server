@@ -10,7 +10,7 @@ This server is not ready for production use at this point!
 Features
 --------
 
-* Written in C and with performance in mind.
+* Written in C with performance in mind.
 * Acts as an SMTP server, no need for any 3rd-party software.
 * Validates DKIM signatures for data integrity.
 * Passes the reports in "real-time" to a web service as JSON data.
