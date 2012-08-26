@@ -15,6 +15,7 @@ Features
 * Validates DKIM signatures for data integrity.
 * Passes the reports in "real-time" to a web service as JSON data.
 * Internal queueing - persistant.
+* Written in C.
 
 
 Install
