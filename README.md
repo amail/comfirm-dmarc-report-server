@@ -1,14 +1,14 @@
 Comfirm DMARC Report Server
 ===========================
-v 0.7
+*v 0.7*
 
-Server for receiving DMARC reports and passing them to a web service as JSON.
+Server for receiving **DMARC** reports and passing them to a web service as JSON.
 
 This server is not ready for production use at this point!
 
 
 Features
-========
+--------
 
 * Acts as an SMTP server, no need for 3rd-party software.
 * High performance, uses epoll().
@@ -18,16 +18,15 @@ Features
 
 
 Install
-=======
+-------
 
-./configure
-make
-sudo make install
-sudo comfirm-dmarc -c /etc/comfirm-dmarc/comfirm-dmarc.conf
-
+    $ ./configure
+    $ make
+    # make install
+    # comfirm-dmarc -c /etc/comfirm-dmarc/comfirm-dmarc.conf
 
 TODO
-====
+----
 
 * The server is currently only handling base64 encoded emails, should add proper MIME handling.
 * Using an extended version of firm-dkim to validate signatures, only supports relaxed canon algorithm.
