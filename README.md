@@ -2,7 +2,7 @@ Comfirm DMARC Report Server
 ===========================
 *v 0.7*
 
-Server for receiving **DMARC** reports and passing them to a web service as JSON.
+Server for receiving **DMARC** reports, validate their integrity, and passing them to a web service as JSON.
 
 This server is not ready for production use at this point!
 
@@ -10,10 +10,10 @@ This server is not ready for production use at this point!
 Features
 --------
 
-* Acts as an SMTP server, no need for 3rd-party software.
+* Acts as an SMTP server, no need for any 3rd-party software.
 * High performance, uses epoll().
 * Validates DKIM signatures for data integrity.
-* Passes the reports in real-time to a web service as JSON.
+* Passes the reports in "real-time" to a web service as JSON data.
 * Internal queueing - persistant.
 
 
