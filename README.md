@@ -1,4 +1,4 @@
-Comfirm DMARC Report Server
+Comfirm DMARC Report Server "Comdark"
 ===========================
 *v 0.7*
 
