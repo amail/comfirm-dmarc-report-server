@@ -10,13 +10,11 @@ This server is not ready for production use at this point!
 Features
 --------
 
+* Written in C and with performance in mind.
 * Acts as an SMTP server, no need for any 3rd-party software.
-* High performance, uses epoll().
 * Validates DKIM signatures for data integrity.
 * Passes the reports in "real-time" to a web service as JSON data.
-* Internal queueing - persistant.
-* Written in C.
-
+* Persistent queueing of web service requests. I.e. if web service is down then the reports will be sent as soon as it gets up. Also means that it can survive a restart.
 
 Install
 -------
@@ -31,4 +29,4 @@ TODO
 
 * The server is currently only handling base64 encoded emails, should add proper MIME handling.
 * Using an extended version of firm-dkim to validate signatures, only supports relaxed canon algorithm.
-* Needs more testing.
+* Needs more testing + unit tests.
