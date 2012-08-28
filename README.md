@@ -38,13 +38,14 @@ Dependencies
 
 * firm-dkim-extended *(included, used for signature validation)*
 * libcurl *(used for performing web service calls)*
+* openSSL *(used by firm-dkim and base64 decoding)*
 
 TODO
 ----
 
 * Add support for multipart messages.
 * The server is currently only handling base64 encoded emails, should add proper MIME handling.
-* DKIM (firm-dkim): Add support for SHA1 and canoninical simple
+* DKIM (firm-dkim): Add support for SHA1 and canoninical simple.
 * Add support for larger files.
 * Needs more testing + unit tests.
 * Port to xBSD.
