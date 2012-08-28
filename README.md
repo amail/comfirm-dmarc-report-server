@@ -1,10 +1,10 @@
-Comfirm DMARC Report Server "Comdark"
-===========================
+Comfirm DMARC Report Server ("Comdark")
+=======================================
 *v 0.7*
 
 Server for receiving **DMARC** reports, validate their integrity, and passing them to a web service as JSON.
 
-This server is not ready for production use at this point!
+**This server is not ready for production use at this point!**
 
 
 Features
@@ -20,8 +20,11 @@ Install
 -------
 
 First, install firm-dkim (extended version):
+    
+    $ cd firm-dkim-extended
     $ make
     # make install
+    $ cd ..
     
 Now install the server:
 
