@@ -33,6 +33,12 @@ Now install the server:
     # make install
     # comfirm-dmarc -c /etc/comfirm-dmarc/comfirm-dmarc.conf
 
+Dependencies
+------------
+
+* firm-dkim-extended *(included, used for signature validation)*
+* libcurl *(used for performing web service calls)*
+
 TODO
 ----
 
