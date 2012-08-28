@@ -1,0 +1,59 @@
+                                                                                                                                                                                                                                                               
+Delivered-To: timothy.johansson@comfirm.se
+Received: by 10.64.170.74 with SMTP id ak10csp31538iec;
+        Thu, 23 Aug 2012 02:09:03 -0700 (PDT)
+Received: by 10.50.182.161 with SMTP id ef1mr5224383igc.0.1345712943291;
+        Thu, 23 Aug 2012 02:09:03 -0700 (PDT)
+Return-Path: <noreply-dmarc-support@google.com>
+Received: from mail-iy0-f201.google.com (mail-iy0-f201.google.com [209.85.210.201])
+        by mx.google.com with ESMTPS id j4si11692516icd.75.2012.08.23.02.09.02
+        (version=TLSv1/SSLv3 cipher=OTHER);
+        Thu, 23 Aug 2012 02:09:03 -0700 (PDT)
+Received-SPF: pass (google.com: domain of noreply-dmarc-support@google.com designates 209.85.210.201 as permitted sender) client-ip=209.85.210.201;
+Authentication-Results: mx.google.com; spf=pass (google.com: domain of noreply-dmarc-support@google.com designates 209.85.210.201 as permitted sender) smtp.mail=noreply-dmarc-support@google.com; dkim=pass header.i=@google.com
+Received: by iadx2 with SMTP id x2so134867iad.2
+        for <timothy.johansson@comfirm.se>; Thu, 23 Aug 2012 02:09:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20120113;
+        h=mime-version:message-id:date:subject:from:to:content-type
+         :content-disposition:content-transfer-encoding;
+        bh=ZuZFre63fmDv3BrD6gfeuHEAe46kJHQ58JyRU9i8Ivc=;
+        b=B/klyv8KQeyfEfAC7WPTvECs0cLOWuPTEdKWMd8m0Rz1Lw0mN5Fk8QWFFO8FO7367p
+         9Jx4uTu07GkDyX13xGpXbH7NbVCBD8NrTKVfwbSy3stj92lSIeonuVmNMD5ukYozk5mq
+         UC8lS/I/fg0V/2VZK5y88foP0FvKqQBpBVyVrnw280LDjO45Vz/xFhGrF8BSh76Oe6Gk
+         iYuoDefKjrbgwKIx717f9u3L3D3n7EIXsFqFGdq2QyeG7Oe/+zjZsloeU7jpc1IoApy6
+         olNrB37WM7/313cG7u+tfOHg2tn3DVF7LHF9Gnr6j/Sjpkw4GST/OqbF+kad/wx5Rdcp
+         Ur8A==
+MIME-Version: 1.0
+Received: by 10.182.52.99 with SMTP id s3mr19536obo.44.1345712942578; Thu, 23
+ Aug 2012 02:09:02 -0700 (PDT)
+Message-ID: <6086556396129083077@google.com>
+Date: Thu, 23 Aug 2012 09:09:02 +0000
+Subject: Report domain: comfirm.se Submitter: google.com Report-ID: 6086556396129083077
+From: noreply-dmarc-support@google.com
+To: timothy.johansson@comfirm.se
+Content-Type: application/zip; 
+	name="google.com!comfirm.se!1345593600!1345679999.zip"
+Content-Disposition: attachment; 
+	filename="google.com!comfirm.se!1345593600!1345679999.zip"
+Content-Transfer-Encoding: base64
+
+UEsDBAoAAAAIALdIF0HLAGQLawMAAIFGAAAvAAAAZ29vZ2xlLmNvbSFjb21maXJtLnNlITEzNDU1
+OTM2MDAhMTM0NTY3OTk5OS54bWztnM1ymzAQgO95Co/vFn8GQ4eQnvoE7ZmRQbY1AYkRkMRv38X8
+2rWZtBPiTFlfDCtptVp9lrQS2H96S5PFC1M5l+JxaRB9uWAikjEX+8flr58/Vu5y8RQ8+DvG4i2N
+noOHxcJXLJOqCFNW0JgWtJKBVKp9KGjKgr2U+4SRSKa+1gnrPCylPAmEBA3JcRWnVEWrvMwqdd+H
+xep8TZm3QtEwkqKgURFysZPBoSiyb5rWlCR9SY1qWy40KvJXpkh2fKqvHs2149iuDor/VFbX0rSJ
+x4Gju45tO5bnGKanu5a+2fhan1xnh3azUFGxb1oGoi3bcxEY1tq2PcvRobJa0qYzEZ9SnY0HHzBF
+tMq0c21dbUMH+5lMeHQMs3Kb8PzAOkMkuEoE0PYdVynJGWirRXU6jZ95Gihfqy8aYZ7tTrLquxZl
+0CsCCmftfVQERtWI6uJk1DUDwG2RVK0tSr52rc1lqSIW8izYrIlh2sQ1ieGBJ/uENmskS1EEFtRV
+X7XypkL2QpMSHBS3CVWreZ7JnBdAbWP3UNLnU4zmQwGIimPGggovQDyElhS+dhIN84A3UwaWVBbV
+V71K7Vxn55cLMyFf6w2fx6CC7zj8zLpiB0ZjpsKdkulZ5w3ljaI/ivu0LA6hYnmZFL3Gvn+HYJzj
+0DilKtj4rbnpUw9lSkWjHEqf3XZtHtbldxC9B8gzC1gJv8bk0ghgpMNSu2xqlblF7j30mbpHXJsY
+jjGOn4H4IX6T4WcaNrGtEfqsj6YPwfjaYPSzouPd5sLEUQnh+3j4ulFpPUofzolI35T0QUQwih/O
+iTMFA+ZG10AwEIxLMBycr5C+O9KHWwiI393w04mx0W/jt8ZZcZ5gmPr4cslEMOYJhoFHLojfHfGz
+x/HzkD6kbzr6NuP04dY64jcdfoaDizIE49aDCAgGgnE1vh8DA+P7uYIBYdwGz8kQjGtrDNyQRvw+
+Gb/+0SVTx1Pavn+GD7Df6p+M5vmEhNCEiZiqVc7UC1NkC/6PWE7+1bKpFsBjh7i4KYmD1gT0Dd5C
+wEU2cnE9+jJxNkMwruwjj40YLoIxUzAw+kL87ojfGs+3EL9Px2/tENuAwN8ijourpb/qnolj/y8C
+SB9o2SOrJmdugMx93OimLWv0RVg8/ZwvF6NhFr4g/d+A4Wv9v8n8BlBLAQIKAAoAAAAIALdIF0HL
+AGQLawMAAIFGAAAvAAAAAAAAAAAAAAAAAAAAAABnb29nbGUuY29tIWNvbWZpcm0uc2UhMTM0NTU5
+MzYwMCExMzQ1Njc5OTk5LnhtbFBLBQYAAAAAAQABAF0AAAC4AwAAAAA=

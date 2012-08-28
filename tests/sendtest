@@ -1,0 +1,23 @@
+#!/bin/bash
+
+function send ()
+{
+  (
+    sleep 1
+    echo "EHLO mail.localhost"
+    echo "MAIL FROM:<timothy.johansson@comfirm.se> ENVID=<175-1234-72bdf31f-d5fa-e588-914b-b44e6ed4fde6@mta1.comfirm.se>"
+    echo "RCPT TO:<timothy.johansson@comfirm.se> NOTIFY=NEVER"
+    sleep 1
+    echo "DATA"
+    sleep 1
+    cat mail
+    sleep 1
+    echo "."
+    sleep 1
+    echo "QUIT"
+    sleep 1
+   ) | telnet localhost 90
+}
+
+# send bounce mail test
+send

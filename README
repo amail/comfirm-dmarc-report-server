@@ -1,0 +1,25 @@
+Comfirm DMARC Report Server
+---------------------------
+ by Comfirm AB, 2012
+
+Description:
+  Comfirm DMARC is a very fast and lightweight SMTP server for receiving DMARC reports with integrity check.
+
+
+Tested on:
+-  Linux (Ubuntu)
+  
+  
+Install
+	# ./configure
+ 	# make
+ 	# make install
+
+
+How to start the server
+	# comfirm-dmarc -c /etc/comfirm-dmarc/comfirm-dmarc.conf
+	
+	or
+	
+	# /etc/init.d/comfirm-dmarc start
+

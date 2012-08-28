@@ -1,0 +1,11 @@
+TODO - Comfirm DMARC
+--------------
+
+* Add support for multipart messages
+* Test for memory leaks
+* DKIM (firm-dkim): Add support for SHA1 and canoninical simple
+* Add support for larger files
+
+* Fix worker performance
+* SHARED_MEM_KEY should be pid
+* Port to xBSD
