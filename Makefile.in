@@ -60,8 +60,8 @@ am_comfirm_dmarc_OBJECTS = src/master_server.$(OBJEXT) \
 	src/socket.$(OBJEXT) src/cache.$(OBJEXT) src/request.$(OBJEXT) \
 	src/response.$(OBJEXT) src/connection.$(OBJEXT) \
 	src/config_file.$(OBJEXT) src/lock.$(OBJEXT) \
-	src/events.$(OBJEXT) src/database.$(OBJEXT) \
-	src/base64.$(OBJEXT) src/lib-pq/persisted_queue.$(OBJEXT)
+	src/events.$(OBJEXT) src/base64.$(OBJEXT) \
+	src/lib-pq/persisted_queue.$(OBJEXT)
 comfirm_dmarc_OBJECTS = $(am_comfirm_dmarc_OBJECTS)
 comfirm_dmarc_LDADD = $(LDADD)
 comfirm_dmarc_LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
@@ -178,8 +178,8 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = subdir-objects
 ACLOCAL_AMFLAGS = ${ACLOCAL_FLAGS}
-comfirm_dmarc_SOURCES = src/master_server.c src/server.c src/safe.c src/worker.c src/socket.c src/cache.c src/request.c src/response.c src/connection.c src/config_file.c src/lock.c src/events.c src/database.c src/base64.c src/lib-pq/persisted_queue.c
-comfirm_dmarc_LDFLAGS = -Wl,--no-as-needed -lhiredis -lpthread -ljson
+comfirm_dmarc_SOURCES = src/master_server.c src/server.c src/safe.c src/worker.c src/socket.c src/cache.c src/request.c src/response.c src/connection.c src/config_file.c src/lock.c src/events.c src/base64.c src/lib-pq/persisted_queue.c
+comfirm_dmarc_LDFLAGS = -Wl,--no-as-needed -lpthread -ljson
 dist_noinst_SCRIPTS = autogen.sh
 all: all-am
 
@@ -300,8 +300,6 @@ src/config_file.$(OBJEXT): src/$(am__dirstamp) \
 src/lock.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/events.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
-src/database.$(OBJEXT): src/$(am__dirstamp) \
-	src/$(DEPDIR)/$(am__dirstamp)
 src/base64.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/lib-pq/$(am__dirstamp):
@@ -322,7 +320,6 @@ mostlyclean-compile:
 	-rm -f src/cache.$(OBJEXT)
 	-rm -f src/config_file.$(OBJEXT)
 	-rm -f src/connection.$(OBJEXT)
-	-rm -f src/database.$(OBJEXT)
 	-rm -f src/events.$(OBJEXT)
 	-rm -f src/lib-pq/persisted_queue.$(OBJEXT)
 	-rm -f src/lock.$(OBJEXT)
@@ -341,7 +338,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/cache.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/config_file.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/connection.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/database.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/events.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/lock.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/master_server.Po@am__quote@

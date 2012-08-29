@@ -757,6 +757,7 @@ m4trace:configure.ac:10: -1- _AM_SUBST_NOTMAKE([am__fastdepCC_TRUE])
 m4trace:configure.ac:10: -1- _AM_SUBST_NOTMAKE([am__fastdepCC_FALSE])
 m4trace:configure.ac:11: -1- AM_PROG_CC_C_O
 m4trace:configure.ac:11: -1- m4_pattern_allow([^NO_MINUS_C_MINUS_O$])
+m4trace:configure.ac:15: -1- m4_pattern_allow([^HAVE_LIBPTHREAD$])
 m4trace:configure.ac:18: -1- m4_pattern_allow([^CPP$])
 m4trace:configure.ac:18: -1- m4_pattern_allow([^CPPFLAGS$])
 m4trace:configure.ac:18: -1- m4_pattern_allow([^CPP$])

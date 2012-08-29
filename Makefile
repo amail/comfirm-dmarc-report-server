@@ -60,8 +60,8 @@ am_comfirm_dmarc_OBJECTS = src/master_server.$(OBJEXT) \
 	src/socket.$(OBJEXT) src/cache.$(OBJEXT) src/request.$(OBJEXT) \
 	src/response.$(OBJEXT) src/connection.$(OBJEXT) \
 	src/config_file.$(OBJEXT) src/lock.$(OBJEXT) \
-	src/events.$(OBJEXT) src/database.$(OBJEXT) \
-	src/base64.$(OBJEXT) src/lib-pq/persisted_queue.$(OBJEXT)
+	src/events.$(OBJEXT) src/base64.$(OBJEXT) \
+	src/lib-pq/persisted_queue.$(OBJEXT)
 comfirm_dmarc_OBJECTS = $(am_comfirm_dmarc_OBJECTS)
 comfirm_dmarc_LDADD = $(LDADD)
 comfirm_dmarc_LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
@@ -90,11 +90,11 @@ DIST_ARCHIVES = $(distdir).tar.gz
 GZIP_ENV = --best
 distuninstallcheck_listfiles = find . -type f -print
 distcleancheck_listfiles = find . -type f -print
-ACLOCAL = ${SHELL} /home/timothy/Projects/comfirm/backend/servers/comfirm-dmarc/missing --run aclocal-1.11
-AMTAR = ${SHELL} /home/timothy/Projects/comfirm/backend/servers/comfirm-dmarc/missing --run tar
-AUTOCONF = ${SHELL} /home/timothy/Projects/comfirm/backend/servers/comfirm-dmarc/missing --run autoconf
-AUTOHEADER = ${SHELL} /home/timothy/Projects/comfirm/backend/servers/comfirm-dmarc/missing --run autoheader
-AUTOMAKE = ${SHELL} /home/timothy/Projects/comfirm/backend/servers/comfirm-dmarc/missing --run automake-1.11
+ACLOCAL = ${SHELL} /home/timothy/Projects/comfirm-dmarc-report-server/missing --run aclocal-1.11
+AMTAR = ${SHELL} /home/timothy/Projects/comfirm-dmarc-report-server/missing --run tar
+AUTOCONF = ${SHELL} /home/timothy/Projects/comfirm-dmarc-report-server/missing --run autoconf
+AUTOHEADER = ${SHELL} /home/timothy/Projects/comfirm-dmarc-report-server/missing --run autoheader
+AUTOMAKE = ${SHELL} /home/timothy/Projects/comfirm-dmarc-report-server/missing --run automake-1.11
 AWK = mawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
@@ -117,9 +117,9 @@ INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 LDFLAGS = 
 LIBOBJS = 
-LIBS = 
+LIBS = -lpthread 
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /home/timothy/Projects/comfirm/backend/servers/comfirm-dmarc/missing --run makeinfo
+MAKEINFO = ${SHELL} /home/timothy/Projects/comfirm-dmarc-report-server/missing --run makeinfo
 MKDIR_P = /bin/mkdir -p
 OBJEXT = o
 PACKAGE = comfirm-dmarc
@@ -134,10 +134,10 @@ SET_MAKE =
 SHELL = /bin/bash
 STRIP = 
 VERSION = 1.0
-abs_builddir = /home/timothy/Projects/comfirm/backend/servers/comfirm-dmarc
-abs_srcdir = /home/timothy/Projects/comfirm/backend/servers/comfirm-dmarc
-abs_top_builddir = /home/timothy/Projects/comfirm/backend/servers/comfirm-dmarc
-abs_top_srcdir = /home/timothy/Projects/comfirm/backend/servers/comfirm-dmarc
+abs_builddir = /home/timothy/Projects/comfirm-dmarc-report-server
+abs_srcdir = /home/timothy/Projects/comfirm-dmarc-report-server
+abs_top_builddir = /home/timothy/Projects/comfirm-dmarc-report-server
+abs_top_srcdir = /home/timothy/Projects/comfirm-dmarc-report-server
 ac_ct_CC = gcc
 am__include = include
 am__leading_dot = .
@@ -156,7 +156,7 @@ host_alias =
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/timothy/Projects/comfirm/backend/servers/comfirm-dmarc/install-sh
+install_sh = ${SHELL} /home/timothy/Projects/comfirm-dmarc-report-server/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -178,8 +178,8 @@ top_builddir = .
 top_srcdir = .
 AUTOMAKE_OPTIONS = subdir-objects
 ACLOCAL_AMFLAGS = ${ACLOCAL_FLAGS}
-comfirm_dmarc_SOURCES = src/master_server.c src/server.c src/safe.c src/worker.c src/socket.c src/cache.c src/request.c src/response.c src/connection.c src/config_file.c src/lock.c src/events.c src/database.c src/base64.c src/lib-pq/persisted_queue.c
-comfirm_dmarc_LDFLAGS = -Wl,--no-as-needed -lhiredis -lpthread -ljson
+comfirm_dmarc_SOURCES = src/master_server.c src/server.c src/safe.c src/worker.c src/socket.c src/cache.c src/request.c src/response.c src/connection.c src/config_file.c src/lock.c src/events.c src/base64.c src/lib-pq/persisted_queue.c
+comfirm_dmarc_LDFLAGS = -Wl,--no-as-needed -lpthread -ljson
 dist_noinst_SCRIPTS = autogen.sh
 all: all-am
 
@@ -300,8 +300,6 @@ src/config_file.$(OBJEXT): src/$(am__dirstamp) \
 src/lock.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/events.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
-src/database.$(OBJEXT): src/$(am__dirstamp) \
-	src/$(DEPDIR)/$(am__dirstamp)
 src/base64.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/lib-pq/$(am__dirstamp):
@@ -322,7 +320,6 @@ mostlyclean-compile:
 	-rm -f src/cache.$(OBJEXT)
 	-rm -f src/config_file.$(OBJEXT)
 	-rm -f src/connection.$(OBJEXT)
-	-rm -f src/database.$(OBJEXT)
 	-rm -f src/events.$(OBJEXT)
 	-rm -f src/lib-pq/persisted_queue.$(OBJEXT)
 	-rm -f src/lock.$(OBJEXT)
@@ -341,7 +338,6 @@ include src/$(DEPDIR)/base64.Po
 include src/$(DEPDIR)/cache.Po
 include src/$(DEPDIR)/config_file.Po
 include src/$(DEPDIR)/connection.Po
-include src/$(DEPDIR)/database.Po
 include src/$(DEPDIR)/events.Po
 include src/$(DEPDIR)/lock.Po
 include src/$(DEPDIR)/master_server.Po

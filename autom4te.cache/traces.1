@@ -301,6 +301,10 @@ m4trace:configure.ac:11: -1- m4_pattern_allow([^NO_MINUS_C_MINUS_O$])
 m4trace:configure.ac:11: -1- AH_OUTPUT([NO_MINUS_C_MINUS_O], [/* Define to 1 if your C compiler doesn\'t accept -c and -o together. */
 @%:@undef NO_MINUS_C_MINUS_O])
 m4trace:configure.ac:11: -1- AC_REQUIRE_AUX_FILE([compile])
+m4trace:configure.ac:15: -1- AH_OUTPUT([HAVE_LIBPTHREAD], [/* Define to 1 if you have the `pthread\' library (-lpthread). */
+@%:@undef HAVE_LIBPTHREAD])
+m4trace:configure.ac:15: -1- AC_DEFINE_TRACE_LITERAL([HAVE_LIBPTHREAD])
+m4trace:configure.ac:15: -1- m4_pattern_allow([^HAVE_LIBPTHREAD$])
 m4trace:configure.ac:18: -1- AH_OUTPUT([HAVE_STDIO_H], [/* Define to 1 if you have the <stdio.h> header file. */
 @%:@undef HAVE_STDIO_H])
 m4trace:configure.ac:18: -1- AH_OUTPUT([HAVE_UNISTD_H], [/* Define to 1 if you have the <unistd.h> header file. */
@@ -321,8 +325,6 @@ m4trace:configure.ac:18: -1- AH_OUTPUT([HAVE_NETINET_TCP_H], [/* Define to 1 if 
 @%:@undef HAVE_NETINET_TCP_H])
 m4trace:configure.ac:18: -1- AH_OUTPUT([HAVE_SCHED_H], [/* Define to 1 if you have the <sched.h> header file. */
 @%:@undef HAVE_SCHED_H])
-m4trace:configure.ac:18: -1- AH_OUTPUT([HAVE_HIREDIS_H], [/* Define to 1 if you have the <hiredis.h> header file. */
-@%:@undef HAVE_HIREDIS_H])
 m4trace:configure.ac:18: -1- AH_OUTPUT([HAVE_FIRM_DKIM_H], [/* Define to 1 if you have the <firm-dkim.h> header file. */
 @%:@undef HAVE_FIRM_DKIM_H])
 m4trace:configure.ac:18: -1- AC_SUBST([CPP])

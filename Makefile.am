@@ -4,8 +4,8 @@ AUTOMAKE_OPTIONS = subdir-objects
 ACLOCAL_AMFLAGS = ${ACLOCAL_FLAGS}
 
 bin_PROGRAMS = comfirm_dmarc
-comfirm_dmarc_SOURCES = src/master_server.c src/server.c src/safe.c src/worker.c src/socket.c src/cache.c src/request.c src/response.c src/connection.c src/config_file.c src/lock.c src/events.c src/database.c src/base64.c src/lib-pq/persisted_queue.c
-comfirm_dmarc_LDFLAGS = -Wl,--no-as-needed -lhiredis -lpthread -ljson
+comfirm_dmarc_SOURCES = src/master_server.c src/server.c src/safe.c src/worker.c src/socket.c src/cache.c src/request.c src/response.c src/connection.c src/config_file.c src/lock.c src/events.c src/base64.c src/lib-pq/persisted_queue.c
+comfirm_dmarc_LDFLAGS = -Wl,--no-as-needed -lpthread -ljson
 
 dist_noinst_SCRIPTS = autogen.sh
 

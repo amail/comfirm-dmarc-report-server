@@ -18,8 +18,6 @@
 	#include <sys/time.h>
 #endif
 
-#include <hiredis.h>
-
 
 /* start key to attach shared memory */
 /* TODO: use pid instead */
@@ -42,16 +40,6 @@
 typedef struct {
 	sem_t mutex;
 } lock;
-
-typedef struct {
-	char *host;
-	int port;
-	struct timeval timeout;
-
-	int is_connected;
-
-	redisContext *conn;
-} database;
 
 typedef struct {
 	/* used by headers */
@@ -221,10 +209,6 @@ typedef struct {
 
 #ifndef _EVENTS_H_
 #include "events.h"
-#endif
-
-#ifndef _DATABASE_H_
-#include "database.h"
 #endif
 
 #endif
