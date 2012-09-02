@@ -12,6 +12,7 @@
 #include "../lib-pq/persisted_queue.h"
 #include "dns.h"
 #include "base64.h"
+#include "string_buffer.h"
 
 
 /* validate the DKIM signature in message */
@@ -231,7 +232,7 @@ char *json_escape(char *str) {
 }
 
 /* print node as json */
-int print_as_json(char *name, xmlNode *a_node) {
+char *to_json(char *name, xmlNode *a_node) {
 	xmlNode *cur_node = a_node;
 
 	if (name != NULL) {
