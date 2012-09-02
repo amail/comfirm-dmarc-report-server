@@ -39,6 +39,7 @@ Dependencies
 * firm-dkim-extended *(included, used for signature validation)*
 * libcurl *(used for performing web service calls)*
 * openSSL *(used by firm-dkim and base64 decoding)*
+* libxml2 *(used for parsing the DMARC reports)*
 
 TODO
 ----
