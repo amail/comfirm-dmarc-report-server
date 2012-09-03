@@ -1,9 +1,8 @@
-Comfirm DMARC Report Server ("Comdark")
-=======================================
+Comfirm DMARC Report Server ("Comarc")
+======================================
 *v 0.7*
 
 Server for receiving **DMARC** reports, validate their integrity, and passing them to a web service as JSON.
-
 Created by the good guys at [Comfirm](http://comfirm.se).
 
 **This server is not ready for production use at this point!**
@@ -21,28 +20,29 @@ Features
 Install
 -------
 
-First, install the libraries liburl, libxml2, openSSL and zlib.
+**First**, install the libraries liburl, libxml2, openSSL and zlib.
 
-Then, install the extended firm-dkim:
+**Then install the extended firm-dkim:**
     
     $ cd firm-dkim-extended
     $ make
     # make install
     $ cd ..
     
-Now install the server:
+**Now install the server:**
 
     $ ./configure
     $ make
     # make install
 
-Configure the server:
+**Configure the server:**
 
 Open */etc/comfirm-dmarc/comfirm-dmarc.conf* and edit it after your needs.
 
-Start the server by typing:
+**Start the server by typing:**
     
     # comfirm-dmarc -c /etc/comfirm-dmarc/comfirm-dmarc.conf
+
 
 If everything is setup, you could test it by running the included tests and examples.
 
