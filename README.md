@@ -19,7 +19,9 @@ Features
 Install
 -------
 
-First, install firm-dkim (extended version):
+First, install the libraries liburl, libxml2, openSSL and zlib.
+
+Then, install the extended firm-dkim:
     
     $ cd firm-dkim-extended
     $ make
@@ -31,7 +33,17 @@ Now install the server:
     $ ./configure
     $ make
     # make install
+
+Configure the server:
+Open */etc/comfirm-dmarc/comfirm-dmarc.conf* and edit it after your needs.
+
+Start the server by typing:
     # comfirm-dmarc -c /etc/comfirm-dmarc/comfirm-dmarc.conf
+
+If everything is setup, you could test it by running the included tests and examples.
+
+When you are ready to go all you is to setup a web service and an MX pointer to your server.
+(And ofcourse the DMARC record)
 
 Dependencies
 ------------
