@@ -4,6 +4,8 @@ Comfirm DMARC Report Server ("Comdark")
 
 Server for receiving **DMARC** reports, validate their integrity, and passing them to a web service as JSON.
 
+Created by the good guys at [Comfirm](http://comfirm.se).
+
 **This server is not ready for production use at this point!**
 
 
@@ -35,9 +37,11 @@ Now install the server:
     # make install
 
 Configure the server:
+
 Open */etc/comfirm-dmarc/comfirm-dmarc.conf* and edit it after your needs.
 
 Start the server by typing:
+    
     # comfirm-dmarc -c /etc/comfirm-dmarc/comfirm-dmarc.conf
 
 If everything is setup, you could test it by running the included tests and examples.
