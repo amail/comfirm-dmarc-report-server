@@ -39,6 +39,7 @@ worker *worker_init(master_server *master_srv, int num) {
 		if (execl("/usr/local/bin/dmarc-mailhandler", "/usr/local/bin/dmarc-mailhandler", 
 				filepath, 
 				q_size,
+				master_srv->config->web_service_url,
 				(char*)0) == -1) {
 			printf (" * ERROR could not start dequeueing service.\n");
 			exit (1);

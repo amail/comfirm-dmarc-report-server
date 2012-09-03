@@ -122,12 +122,15 @@ typedef struct {
 	
 	int tcp_nodelay; 	/* Nagle (TCP No Delay) algorithm */
 	
-	char *server_name; 	/* server name, used in headers */
+	char *server_name; 	/* server name, used in welcome message */
+	char *hostname;
 	int daemonize;
 	char *chroot;
 	
 	char *queue_file;
 	int queue_size;
+	
+	char *web_service_url;
 } config;
 
 typedef struct {

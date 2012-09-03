@@ -13,7 +13,7 @@ install-data-local:
 	mv /usr/local/bin/comfirm_dmarc /usr/local/bin/comfirm-dmarc
 	mkdir -p /etc/comfirm-dmarc
 	
-	gcc -o dmarc-mailhandler src/lib-pq/persisted_queue.c src/mailhandler/dns.c src/mailhandler/base64.c src/mailhandler/string_buffer.c src/mailhandler/mailhandler.c -lfirm-dkim -lresolv -lcrypt -lz `xml2-config --cflags --libs`
+	gcc -o dmarc-mailhandler src/lib-pq/persisted_queue.c src/mailhandler/dns.c src/mailhandler/base64.c src/mailhandler/string_buffer.c src/mailhandler/mailhandler.c -lfirm-dkim -lresolv -lcrypt -lz -lcurl `xml2-config --cflags --libs`
 	cp dmarc-mailhandler /usr/local/bin/dmarc-mailhandler
 	
 	cp config/comfirm-dmarc.conf /etc/comfirm-dmarc/comfirm-dmarc.conf

@@ -6,11 +6,11 @@
 
 #define STRING_BUFFER_CHUNK_SIZE 512
 
-typedef struct string_buffer {
-	char *str,
-	int alloc_size,
-	int size
-};
+typedef struct {
+	char *str;
+	int alloc_size;
+	int size;
+} string_buffer;
 
 string_buffer *string_buffer_init();
 int string_buffer_append(string_buffer *sb, char *value);

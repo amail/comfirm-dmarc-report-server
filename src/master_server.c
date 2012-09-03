@@ -34,9 +34,9 @@ static void daemonize() {
 	}
 	
 	/* close standard file descriptors */
-	close (STDIN_FILENO);
+	/*close (STDIN_FILENO);
         close (STDOUT_FILENO);
-        close (STDERR_FILENO);
+        close (STDERR_FILENO);*/
 }
 
 int master_server_init(master_server *master_srv) {

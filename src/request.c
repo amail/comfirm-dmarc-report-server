@@ -46,7 +46,7 @@ int request_parse_commands(server *srv, connection *conn) {
 			    	i += 5;
 			}
 			else if (strncmp(data+i, "EHLO", 4) == 0) {
-			    	response_append (resp, "250 Yo, whaddup?\r\n");
+			    	response_append (resp, "250 Hi, you have a report for me?\r\n");
 			}
 			else if (strncmp(data+i, "MAIL FROM:", 10) == 0) {
 			    	response_append (resp, "250 Ok\r\n");
@@ -55,7 +55,7 @@ int request_parse_commands(server *srv, connection *conn) {
 			    	response_append (resp, "250 Ok\r\n");
 			}
 			else if (strncmp(data+i, "QUIT", 4) == 0) {
-			    	response_append (resp, "221 Bye, come back later!\r\n");
+			    	response_append (resp, "221 Bye, see you tomorrow!\r\n");
 			    	req->quit = 1;
 			}
 		} else {
@@ -176,7 +176,6 @@ int request_parse_data(server *srv, connection *conn) {
 	req->header_count = header_count;
 
 	/* mail body */
-	printf ("data-len: %d\ni=%d\n", data_len, i);
 	if (i < data_len && done == 1) {
 		req->body_len = data_len - i;
 		req->body = malloc(req->body_len + 1);

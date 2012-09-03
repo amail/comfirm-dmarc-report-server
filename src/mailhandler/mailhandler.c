@@ -6,6 +6,8 @@
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 
+#include <curl/curl.h>
+
 #include <firm-dkim.h>
 #include "zlib.h"
 
@@ -231,61 +233,81 @@ char *json_escape(char *str) {
 	return new;
 }
 
-/* print node as json */
-char *to_json(char *name, xmlNode *a_node) {
+/* convert an xml node into json */
+int to_json(char *name, xmlNode *a_node, string_buffer *sb) {
 	xmlNode *cur_node = a_node;
+	int first = 1;
 
 	if (name != NULL) {
-		printf ("\"%s\": {\n", name);
+		string_buffer_append (sb, "\"");
+		string_buffer_append (sb, name);
+		string_buffer_append (sb, "\": {");
 	} else {
-		printf ("{\n");
+		string_buffer_append (sb, "{");
 	}
 
 	for (; cur_node; cur_node = cur_node->next) {
 		if (cur_node->type == XML_ELEMENT_NODE) {
-			
+			if (!first) {
+				string_buffer_append (sb, ",");
+			} else {
+				first = 0;
+			}
+		
 			if (cur_node->children != NULL) {
 				if (cur_node->children->next == NULL) {
 					char *content = (char*)xmlNodeGetContent(cur_node->children);
 					char *value = json_escape(content);
-					printf ("\t\"%s\": \"%s\",\n", cur_node->name, value);
+					
+					string_buffer_append (sb, "\"");
+					string_buffer_append (sb, cur_node->name);
+					string_buffer_append (sb, "\": \"");
+					string_buffer_append (sb, value);
+					string_buffer_append (sb, "\"");
+					
 					free (value);
 				} else {
-					printf ("\t");
-					print_as_json (cur_node->name, cur_node->children);
+					to_json (cur_node->name, cur_node->children, sb);
 				}
 			} else {
-				printf ("\t\"%s\": \"\",\n", cur_node->name);
+				string_buffer_append (sb, "\"");
+				string_buffer_append (sb, cur_node->name);
+				string_buffer_append (sb, "\": \"\"");
 			}
 		}
 	}
 	
-	printf (" }\n");
-	
+	string_buffer_append (sb, "}");
 	return 0;
 }
 
-/* print all records */
-int print_records(xmlNode *a_node) {
+/* convert all xml records into json */
+int records_to_json(xmlNode *a_node, string_buffer *sb) {
 	xmlNode *cur_node = a_node;
+	int first = 1;
 	
-	printf ("\"records\": [\n");
+	string_buffer_append (sb, "\"records\": [");
 	
 	for (; cur_node; cur_node = cur_node->next) {
 		if (cur_node->type == XML_ELEMENT_NODE) {
 			if (strcmp(cur_node->name, "record") == 0) {
-				print_as_json (NULL, cur_node->children);
+				if (!first) {
+					string_buffer_append (sb, ",");
+				} else {
+					first = 0;
+				}
+				
+				to_json (NULL, cur_node->children, sb);
 			}
 		}
 	}
 	
-	printf ("]\n");
-	
+	string_buffer_append (sb, "]");
 	return 0;
 }
 
-/* parse the xml document */
-int parse_xml(char *document) {
+/* parse the xml document and convert it into json */
+int parse_xml(char *document, string_buffer *sb) {
 	LIBXML_TEST_VERSION
 	
 	xmlDocPtr doc = xmlReadMemory(document, strlen(document), "noname.xml", NULL, 0);
@@ -305,15 +327,22 @@ int parse_xml(char *document) {
 	for (; cur_node; cur_node = cur_node->next) {
 		if (cur_node->type == XML_ELEMENT_NODE) {
 			if (strcmp(cur_node->name, "report_metadata") == 0) {
-				print_as_json ("metadata", cur_node->children);
+				to_json ("metadata", cur_node->children, sb);
 			} else if (strcmp(cur_node->name, "policy_published") == 0) {
-				print_as_json ("policy", cur_node->children);
+				if (sb->str != NULL) {
+					string_buffer_append (sb, ",");
+				}
+				to_json ("policy", cur_node->children, sb);
 			}
 		}
 	}
 	
-	/* print all records */
-	print_records (root_element->children);
+	if (sb->str != NULL) {
+		string_buffer_append (sb, ",");
+	}
+	
+	/* converts all records into json */
+	records_to_json (root_element->children, sb);
 	
 	/* free memory */
 	xmlFreeDoc (doc);
@@ -322,12 +351,29 @@ int parse_xml(char *document) {
 	return 0;
 }
 
+int post_data(string_buffer *data, CURL *curl, char *url) {
+	CURLcode res;
+	
+	curl_easy_setopt (curl, CURLOPT_URL, url);
+	curl_easy_setopt (curl, CURLOPT_POSTFIELDS, data->str);
+
+	res = curl_easy_perform(curl);
+	
+	if (res != CURLE_OK) {
+		fprintf (stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+	}
+	
+	/* always cleanup */ 
+	curl_easy_cleanup (curl);
+}
+
 int main(int argc, const char* argv[]) {
 	const char *filepath = argv[1];
 	int message_count = atoi(argv[2]);
+	const char *web_service_url = argv[3];
 	int i = 0;
 
-	printf (" * Starting dequeing service... (queue-file='%s', message-count=%d)\n", filepath, message_count);
+	printf (" * Starting dequeing service... (queue-file='%s', message-count=%d, web-service-url='%s')\n", filepath, message_count, web_service_url);
 
 	pq_ref *queue;
 	mail *message = NULL;
@@ -335,6 +381,15 @@ int main(int argc, const char* argv[]) {
 	/* open the queue file */
 	if (pq_init(&queue, (char*)filepath, message_count) < 0) {
 		printf (" * ERROR could not initiate the queue.\n");
+		return 1;
+	}
+	
+	/* init curl stuff */
+	curl_global_init (CURL_GLOBAL_ALL);
+	CURL *curl = curl_easy_init();
+	
+	if (!curl) {
+		printf (" * ERROR could not initiate libcurl.\n");
 		return 1;
 	}
 
@@ -373,13 +428,28 @@ int main(int argc, const char* argv[]) {
 					}
 			
 					/* unzip content */
+					printf (" * Unzipping content...\n");
 					char *xml = unzip(zipdata, zipdata_len);
-			
+					
 					if (xml != NULL) {
 						/* parse the xml document */
-						parse_xml (xml);
+						printf (" * Converting the XML document into JSON...\n");
+						string_buffer *json = string_buffer_init();
+						parse_xml (xml, json);
+						
+						/* post data to web service */
+						if (json->str != NULL) {
+							printf (" * Posting the report to the web service...\n");
+							post_data (json, curl, web_service_url);
+						} else {
+							printf (" * ERROR could not convert the XML.");
+						}
+						
+						string_buffer_free (json);
+						
+						printf (" * Done!\n");
 					}
-			
+					
 					free (xml);
 					free (zipdata);
 				}
@@ -394,6 +464,8 @@ int main(int argc, const char* argv[]) {
 		printf (" * ERROR could not close the queue.\n");
 		return 1;
 	}
+	
+	curl_global_cleanup ();
 
 	return 0;
 }

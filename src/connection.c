@@ -41,7 +41,11 @@ int connection_handle(worker *w, connection *conn, event_handler *ev_handler, in
 	/* new connection */
 	if (conn->status == CONN_STARTED) {
 		/* send welcome message */
-		response_append (conn->response, "220 dmarc.comfirm.se SMTP Comfirm DMARC Report Server\r\n");
+		response_append (conn->response, "220 ");
+		response_append (conn->response, srv->config->hostname);
+		response_append (conn->response, " SMTP ");
+		response_append (conn->response, srv->config->server_name);
+		response_append (conn->response, "\r\n");
 		conn->status = CONN_WRITING;
 	}
 
@@ -72,40 +76,26 @@ int connection_handle(worker *w, connection *conn, event_handler *ev_handler, in
 			/* parse the commands (SMTP) */
 			if (request_parse_commands(srv, conn) == 0) {
 				if (conn->request->process) {
-					printf ("Process data\n");
-					
 					/* parse the data (DATA) */
 					request_parse_data (srv, conn);
 					
-					printf ("Processed data\n");
-					
 					if (conn->request->header_count > 0) {
-						printf ("In queueing process...\n");
-					
 						/* create a mail object */
 						mail *m = malloc(sizeof(mail));
 						
-						printf ("Allocated mail...\n%s\n", conn->request->body);
-						
 						/* copy body */
 						if (conn->request->body_len < BODY_MAX_LEN) {
-							printf ("copying...\n");
 							memcpy (&m->body, conn->request->body, conn->request->body_len+1);
-							printf ("copyed...\n");
 						} else {
 							safe_warn (srv, "body to large for queue.");
 							m->body[0] = NULL;
 						}
-					
-						printf ("copy headers...\n");
 					
 						/* copy headers */
 						m->header_count = conn->request->header_count;
 						for (i = 0; i < conn->request->header_count && i < conn->request->header_count; ++i) {
 							memcpy (&m->headers[i], conn->request->headers[i], sizeof(hdr)); 
 						}
-					
-						printf ("queueing...\n");
 					
 						/* add this mail to the queue for further validation */
 						if (pq_enqueue(w->msg_queue, m) == PQ_MESSAGE_SIZE_REACHED_ERROR) {

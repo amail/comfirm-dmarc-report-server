@@ -22,6 +22,7 @@ int config_load_default(config *conf) {
 	
 	conf->listen_port = 25;
 	conf->server_name = "Comfirm DMARC Server";
+	conf->hostname = "dmarc.amail.io";
 	conf->daemonize = 1;
 	
 	conf->read_buffer_size = 4046;
@@ -35,6 +36,8 @@ int config_load_default(config *conf) {
 	conf->queue_file = "/tmp/rest-queue";
 	conf->queue_size = 100000;
 	
+	conf->web_service_url = "http://localhost/";
+	
 	return 0;
 }
 
@@ -45,8 +48,11 @@ int config_copy(config *dest, config *source) {
 	
 	/* copy all pointer values */
 	config_save_value ("server-name", source->server_name, dest);
+	config_save_value ("hostname", source->hostname, dest);
+	config_save_value ("hostname", source->hostname, dest);
 	config_save_value ("chroot", source->chroot, dest);
 	config_save_value ("queue-file", source->queue_file, dest);
+	config_save_value ("web-service-url", source->web_service_url, dest);
 	
 	return 0;
 }
@@ -157,6 +163,10 @@ int config_save_value(char *key, char *value, config *conf) {
 		conf->server_name = malloc(strlen(value)+1);
 		memcpy (conf->server_name, value, strlen(value)+1);
 	}
+	else if (strcmp(key, "hostname") == 0) {
+		conf->hostname = malloc(strlen(value)+1);
+		memcpy (conf->hostname, value, strlen(value)+1);
+	}
 	else if (strcmp(key, "daemonize") == 0) {
 		conf->daemonize = atoi(value);
 	}
@@ -182,6 +192,10 @@ int config_save_value(char *key, char *value, config *conf) {
 	}
 	else if (strcmp(key, "queue-size") == 0) {
 		conf->queue_size = atoi(value);
+	}
+	else if (strcmp(key, "web-service-url") == 0) {
+		conf->web_service_url = malloc(strlen(value)+1);
+		memcpy (conf->web_service_url, value, strlen(value)+1);
 	}
 	else {
 		/* key not found */
