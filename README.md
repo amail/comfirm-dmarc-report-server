@@ -5,8 +5,6 @@ Comfirm DMARC Report Server ("Comdarc")
 Server for receiving **DMARC** reports, validate their integrity, and passing them to a web service as JSON.
 Created by the good guys at [Comfirm](http://comfirm.se).
 
-**This server is not ready for production use at this point!**
-
 
 Features
 --------
